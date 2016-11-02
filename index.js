@@ -60,9 +60,12 @@ core._db.get('_key', {valueEncoding: 'binary'}, function (_, oldKey) {
   } else if (cmd === 'list' || cmd === 'ls') {
     parse(feed, {}, function (err, map) {
       if (err) throw err
-      Object.keys(map).forEach(function (key) {
-        console.log(key + ' = ' + map[key])
+      process.stdout.write('{\n')
+      Object.keys(map).forEach(function (key, i, keys) {
+        process.stdout.write('  "' + key + '": "' + map[key] + '"')
+        if (i !== (keys.length - 1)) process.stdout.write(',\n')
       })
+      process.stdout.write('\n}\n')
     })
   } else if (cmd === 'get') {
     parse(feed, {}, function (err, view) {
