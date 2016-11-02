@@ -1,6 +1,6 @@
 {
   "name": "hypername",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Distributed name server",
   "main": "index.js",
   "dependencies": {
