@@ -1,0 +1,27 @@
+{
+  "name": "hypername",
+  "version": "0.0.0",
+  "description": "Distributed name server",
+  "main": "index.js",
+  "dependencies": {
+    "hypercore": "^4.11.0",
+    "hyperdrive-archive-swarm": "^4.1.6",
+    "level": "^1.5.0",
+    "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1"
+  },
+  "devDependencies": {},
+  "bin": {
+    "hypername": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mafintosh/hypername.git"
+  },
+  "author": "Mathias Buus (@mafintosh)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mafintosh/hypername/issues"
+  },
+  "homepage": "https://github.com/mafintosh/hypername"
+}
