@@ -2,19 +2,21 @@
     $ hypername <command> [options]
 
   Commands:
-    init <path>              Initialize a hypername database in a path
-    set <db> <key> <value>   Save a value in the store
-    get <db> <key>           Get a value from the store
-    list <db>                List all key value-pairs
-    sync <db>                Connect to the swarm and synchronize data
+    init <topic>                Initialize a hypername database.
+    set <topic> <key> <value>   Save a value in the store
+    get <topic> <key>           Get a value from the store
+    list <topic>                List all key value-pairs
+    sync <topic>                Connect to the swarm and synchronize data
 
     Options:
-      -h, --help              Print usage
-          --exit              Exit after the first download
+      -h, --help                Print usage
+          --no-live             Exit after the first download
 
   Examples:
-    $ hypername init ./name.db         # start hypername & print key
-    $ hypername set ./name.db hi cat   # save a key-value pair
-    $ hypername get ./name.db hi       # get a value at a key
-    $ hypername list ./name.db         # list all key-value pairs
-    $ hypername sync ./name.db         # sync hypername over the network
+    $ hypername init my-topic         # start hypername & print key
+    $ hypername set my-topic hi cat   # save a key-value pair
+    $ hypername get my-topic hi       # get a value at a key
+    $ hypername list my-topic         # list all key-value pairs
+    $ hypername sync my-topic         # sync hypername over the network
+
+  All data is stored in ~/.hypername/<topic>

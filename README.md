@@ -11,14 +11,14 @@ npm install -g hypername
 On one computer
 
 ``` sh
-hypername init some.db
+hypername init my-topic
 <prints-key>
 ```
 
 On another
 
 ``` sh
-hypername init some-other.db <key-printed-above>
+hypername init my-topic <key-printed-above>
 ```
 
 Now the first computer will be able to share name=value pairs with the other one
@@ -26,15 +26,15 @@ Now the first computer will be able to share name=value pairs with the other one
 On the first computer do
 
 ``` sh
-hypername set some.db hello world
-hypername sync some.db
+hypername set my-topic hello world
+hypername sync my-topic
 ```
 
 On the other
 
 ``` sh
-hypername sync some-other.db --exit # exit after first change
-hypername get some-other.db hello # prints world
+hypername sync my-topic --exit # exit after first change
+hypername get my-topic hello # prints world
 ```
 
 ## API
@@ -43,22 +43,24 @@ hypername get some-other.db hello # prints world
     $ hypername <command> [options]
 
   Commands:
-    init <path>              Initialize a hypername database in a path
-    set <db> <key> <value>   Save a value in the store
-    get <db> <key>           Get a value from the store
-    list <db>                List all key value-pairs
-    sync <db>                Connect to the swarm and synchronize data
+    init <topic>                Initialize a hypername database.
+    set <topic> <key> <value>   Save a value in the store
+    get <topic> <key>           Get a value from the store
+    list <topic>                List all key value-pairs
+    sync <topic>                Connect to the swarm and synchronize data
 
     Options:
-      -h, --help              Print usage
-          --exit              Exit after the first download
+      -h, --help                Print usage
+          --no-live             Exit after the first download
 
   Examples:
-    $ hypername init ./name.db         # start hypername & print key
-    $ hypername set ./name.db hi cat   # save a key-value pair
-    $ hypername get ./name.db hi       # get a value at a key
-    $ hypername list ./name.db         # list all key-value pairs
-    $ hypername sync ./name.db         # sync hypername over the network
+    $ hypername init my-topic         # start hypername & print key
+    $ hypername set my-topic hi cat   # save a key-value pair
+    $ hypername get my-topic hi       # get a value at a key
+    $ hypername list my-topic         # list all key-value pairs
+    $ hypername sync my-topic         # sync hypername over the network
+
+  All data is stored in ~/.hypername/<topic>
 ```
 
 ## License

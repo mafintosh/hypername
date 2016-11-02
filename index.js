@@ -7,24 +7,24 @@ var minimist = require('minimist')
 var mkdirp = require('mkdirp')
 var path = require('path')
 var fs = require('fs')
+var home = process.env.HOME || process.env.USERPROFILE
 
 var usage = fs.readFileSync(path.join(__dirname, 'usage.txt'), 'utf8')
 var argv = minimist(process.argv.slice(2), {
-  boolean: [ 'help' ],
+  boolean: [ 'help', 'live' ],
+  default: {live: true},
   alias: { help: 'h' }
 })
 
-if (argv.help) {
-  console.log(usage)
-  process.exit(0)
-}
-
 var cmd = argv._[0]
-var dir = argv._[1]
+var dir = argv._[1] && path.join(home, '.hypername', argv._[1])
 var key = argv._[2]
 var value = argv._[3]
 
-if (!dir) throw new Error('Usage: hypername <cmd> <db> <options...>')
+if (argv.help || !dir) {
+  console.log(usage)
+  process.exit(argv.help ? 0 : 1)
+}
 
 mkdirp.sync(dir)
 var core = hypercore(level(dir))
@@ -54,7 +54,7 @@ core._db.get('_key', {valueEncoding: 'binary'}, function (_, oldKey) {
       feed.on('download-finished', function () {
         console.log('Pulled ' + (feed.blocks - blocks) + ' change(s)')
         blocks = feed.blocks
-        if (argv.exit) process.exit(0)
+        if (argv.live === false) process.exit(0)
       })
     })
   } else if (cmd === 'list' || cmd === 'ls') {
@@ -76,7 +76,7 @@ core._db.get('_key', {valueEncoding: 'binary'}, function (_, oldKey) {
       if (err) throw err
     })
   } else {
-    throw new Error('Usage: hypername <cmd> <db> <options...>')
+    throw new Error('Usage: hypername <cmd> <topic> <options...>')
   }
 })
 
