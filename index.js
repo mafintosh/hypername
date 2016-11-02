@@ -15,6 +15,8 @@ var dir = argv._[1]
 var key = argv._[2]
 var value = argv._[3]
 
+if (!dir) throw new Error('Usage: hypername <cmd> <db> <options...>')
+
 mkdirp.sync(dir)
 var core = hypercore(level(dir))
 
