@@ -89,7 +89,8 @@ function parse (feed, opts, cb) {
   feed.createReadStream(opts)
     .on('data', function (data) {
       data = JSON.parse(data)
-      view[data.key] = data.value
+      if (data.value) view[data.key] = data.value
+      else delete view[data.key]
     })
     .on('end', function () {
       cb(null, view)
