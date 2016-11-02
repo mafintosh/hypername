@@ -5,10 +5,19 @@ var swarm = require('hyperdrive-archive-swarm')
 var level = require('level')
 var minimist = require('minimist')
 var mkdirp = require('mkdirp')
+var path = require('path')
+var fs = require('fs')
 
+var usage = fs.readFileSync(path.join(__dirname, 'usage.txt'), 'utf8')
 var argv = minimist(process.argv.slice(2), {
-
+  boolean: [ 'help' ],
+  alias: { help: 'h' }
 })
+
+if (argv.help) {
+  console.log(usage)
+  process.exit(0)
+}
 
 var cmd = argv._[0]
 var dir = argv._[1]
